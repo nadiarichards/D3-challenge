@@ -16,6 +16,11 @@ d3.csv("data/data.csv").then (function(data) {
 
     console.log(data);
 
+    data.forEach(function(data) {
+        data.poverty = +data.poverty;
+        data.healthcare = +data.healthcare;
+    });
+
   // Add X axis
   var x = d3.scaleLinear()
     .domain(d3.extent(data, d => d.value))
@@ -37,9 +42,8 @@ d3.csv("data/data.csv").then (function(data) {
     .data(data)
     .enter()
     .append("circle")
-      .attr("cx", function (d) { return x(d.GrLivArea); } )
-      .attr("cy", function (d) { return y(d.SalePrice); } )
+      .attr("cx", function (d) { return x(d.poverty); } )
+      .attr("cy", function (d) { return y(d.healthcare); } )
       .attr("r", 1.5)
       .style("fill", "#69b3a2")
-
-})
+});
