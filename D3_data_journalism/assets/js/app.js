@@ -12,7 +12,9 @@ var svg = d3.select("#scatter")
           "translate(" + margin.left + "," + margin.top + ")");
 
 //Read the data
-d3.csv("data/data.csv", function(data) {
+d3.csv("data/data.csv").then (function(data) {
+
+    console.log(data);
 
   // Add X axis
   var x = d3.scaleLinear()
