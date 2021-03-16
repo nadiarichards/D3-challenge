@@ -31,7 +31,7 @@ d3.csv("assets/data/data.csv").then (function(data) {
 
   // Add Y axis
   var y = d3.scaleLinear()
-    .domain([3, 27])
+    .domain([3, 27]d3.extent(data, yValue))
     .range([ height, 0]);
   svg.append("g")
     .call(d3.axisLeft(y));
