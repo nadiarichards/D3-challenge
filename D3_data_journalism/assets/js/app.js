@@ -12,7 +12,7 @@ var svg = d3.select("#scatter")
           "translate(" + margin.left + "," + margin.top + ")");
 
 //Read the data
-d3.csv("data/data.csv").then (function(data) {
+d3.csv("assets/data/data.csv").then (function(data) {
 
     console.log(data);
 
@@ -23,7 +23,7 @@ d3.csv("data/data.csv").then (function(data) {
 
   // Add X axis
   var x = d3.scaleLinear()
-    .domain(d3.extent(data, d => d.value))
+    .domain([6, 26]d3.extent(data, xValue))
     .range([ 0, width ]);
   svg.append("g")
     .attr("transform", "translate(0," + height + ")")
@@ -31,7 +31,7 @@ d3.csv("data/data.csv").then (function(data) {
 
   // Add Y axis
   var y = d3.scaleLinear()
-    .domain(d3.extent(data, d => d.value))
+    .domain([3, 27])
     .range([ height, 0]);
   svg.append("g")
     .call(d3.axisLeft(y));
@@ -42,8 +42,8 @@ d3.csv("data/data.csv").then (function(data) {
     .data(data)
     .enter()
     .append("circle")
-      .attr("cx", function (d) { return x(d.poverty); } )
-      .attr("cy", function (d) { return y(d.healthcare); } )
-      .attr("r", 1.5)
-      .style("fill", "#69b3a2")
+        .attr("cx", function (d) { return x(d.poverty); } )
+        .attr("cy", function (d) { return y(d.healthcare); } )
+        .attr("r", 1.5)
+        .style("fill", "#69b3a2")
 });
