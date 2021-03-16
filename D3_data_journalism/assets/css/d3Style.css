@@ -1,3 +1,9 @@
+.axis-label {
+  fill: black;
+  font-size: 50pt;
+  font-family: sans-serif;
+}
+
 .aText {
   font-family: sans-serif;
   font-size: 16px;
