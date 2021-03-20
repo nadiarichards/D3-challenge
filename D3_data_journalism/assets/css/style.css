@@ -12,6 +12,16 @@ html {
 body {
   /* Padding bottom by footer height */
   padding-bottom: 80px;
+  margin: 0px;
+}
+
+.tick {
+  font-size: 28pt;
+}
+.axis-label {
+  fill: black;
+  font-size: 50pt;
+  font-family: sans-serif;
 }
 
 #footer {

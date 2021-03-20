@@ -18,11 +18,11 @@ var svg = d3.select("#scatter")
 //Read the data
 d3.csv("assets/data/data.csv").then (function(data) {
 
-    console.log(data);
+  console.log(data);
 
-    data.forEach(function(data) {
-        data.poverty = +data.poverty;
-        data.healthcare = +data.healthcare;
+  data.forEach(function(data) {
+    data.poverty = +data.poverty;
+    data.healthcare = +data.healthcare;
     });
 
   // Add X axis
@@ -53,7 +53,7 @@ d3.csv("assets/data/data.csv").then (function(data) {
     .text(yLabel);
 
   // Add dots
-  svg.append('g')
+  var circlesGroup = svg.append('g')
     .selectAll("dot")
     .data(data)
     .enter()
@@ -62,7 +62,28 @@ d3.csv("assets/data/data.csv").then (function(data) {
         .attr("cy", function (d) { return y(d.healthcare); } )
         .attr("r", 5)
         .style("fill", "rgb(143,194,217)")
+
+  var toolTip = d3.select("body")
+    .append("div")
+    .classed("tooltip", true);
+
+    circlesGroup.on("mouseover", function(d) {
+      toolTip.style("display", "block")
+          .html(
+            `<strong>${dateFormatter(d.date)}<strong><hr>${d.medals}
+        medal(s) won`)
+          .style("left", d3.event.pageX + "px")
+          .style("top", d3.event.pageY + "px");
+    })
+      // Step 3: Create "mouseout" event listener to hide tooltip
+      .on("mouseout", function() {
+        toolTip.style("display", "none");
+      });
+
+  // }).catch(function(error) {
+  //   console.log(error);
 });
+// }
 
 // var width = parseInt(d3.select("#scatter").style("width"));
 // var height = width - width / 3.9;
