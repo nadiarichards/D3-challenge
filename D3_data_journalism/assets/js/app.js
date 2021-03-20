@@ -34,7 +34,7 @@ d3.csv("assets/data/data.csv").then (function(data) {
     .call(d3.axisBottom(x))
     .append('text')
     .attr('class', 'axis-label')
-    .attr('x', innerWidth / 2)
+    .attr('x', width / 2)
     .attr('y', 100)
     .text(xLabel);
 
@@ -46,7 +46,7 @@ d3.csv("assets/data/data.csv").then (function(data) {
     .call(d3.axisLeft(y))
     .append('text')
     .attr('class', 'axis-label')
-    .attr('x', -innerHeight / 2)
+    .attr('x', -height / 2)
     .attr('y', -60)
     .attr('transform', `rotate(-90)`)
     .style('text-anchor', 'middle')
