@@ -18,11 +18,6 @@ body {
 .tick {
   font-size: 28pt;
 }
-.axis-label {
-  fill: black;
-  font-size: 50pt;
-  font-family: sans-serif;
-}
 
 #footer {
   position: absolute;

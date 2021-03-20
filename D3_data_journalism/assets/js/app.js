@@ -3,7 +3,7 @@ const xLabel = "In Poverty (%)";
 const yValue = d => d.healthcare;
 const yLabel = "Lacks Healthcare (%)";
 
-var margin = {top: 20, right: 60, bottom: 100, left: 60},
+var margin = {top: 20, right: 30, bottom: 120, left: 120},
     width = 700 - margin.left - margin.right,
     height = 600 - margin.top - margin.bottom;
 
