@@ -60,7 +60,7 @@ d3.csv("assets/data/data.csv").then (function(data) {
     .append("circle")
         .attr("cx", function (d) { return x(d.poverty); } )
         .attr("cy", function (d) { return y(d.healthcare); } )
-        .attr("r", 5)
+        .attr("r", 8)
         .style("fill", "rgb(143,194,217)")
 
   var toolTip = d3.select("body")
