@@ -1,6 +1,6 @@
-const xValue = d => d.poverty;
+const xValue = d => d.poverty-0.5;
 const xLabel = "In Poverty (%)";
-const yValue = d => d.healthcare;
+const yValue = d => d.healthcare-0.5;
 const yLabel = "Lacks Healthcare (%)";
 
 var margin = {top: 20, right: 30, bottom: 120, left: 120},
@@ -53,8 +53,7 @@ d3.csv("assets/data/data.csv").then (function(data) {
     .text(yLabel);
 
   // Add dots
-  var circlesGroup = svg.append('g')
-    .selectAll("circle")
+  var circlesGroup = svg.selectAll("circle")
     .data(data)
     .enter()
     .append("circle")
@@ -63,7 +62,7 @@ d3.csv("assets/data/data.csv").then (function(data) {
         .attr("r", 8)
         .style("fill", "rgb(143,194,217)")
 
-  circle.append("text")
+  circlesGroup.append("text")
     .text(d => {return d.abbr; })
     .attr("x", d => { return x(d.poverty); })
     .attr("y", d => { return y(d.healthcare); })
