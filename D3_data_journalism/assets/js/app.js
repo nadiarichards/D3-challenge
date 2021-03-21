@@ -64,13 +64,16 @@ d3.csv("assets/data/data.csv").then (function(data) {
         .style("fill", "rgb(143,194,217)")
         .attr("opacity", "0.7");
 
-  circlesGroup.selectAll("text")
+  var circleLabels = svg.append(g)
+    .selectAll(null)
     .data(data)
     .enter()
     .append("text")
     .text(d => {return d.abbr; })
     .attr("x", d => { return x(d.poverty); })
     .attr("y", d => { return y(d.healthcare); })
+    .attr("font-size", "5px")
+    .attr("fill", "white");
         
   // circlesGroup.append("text")
   //   .text(data => data.abbr)
