@@ -11,9 +11,10 @@ var margin = {top: 20, right: 30, bottom: 120, left: 120},
 var svg = d3.select("#scatter")
   .append("svg")
     .attr("width", width + margin.left + margin.right)
-    .attr("height", height + margin.top + margin.bottom)
-  .append("g")
-    .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+    .attr("height", height + margin.top + margin.bottom);
+
+var chartGroup = svg.append("g")
+    .attr("transform", `translate(" + margin.left + "," + margin.top + ")`);
 
 //Read the data
 d3.csv("assets/data/data.csv").then (function(data) {
@@ -64,16 +65,17 @@ d3.csv("assets/data/data.csv").then (function(data) {
         .style("fill", "rgb(143,194,217)")
         .attr("opacity", "0.7");
 
-  var circleLabels = svg.append(g)
-    .selectAll(null)
+  var circleLabels = circlesGroup.append(g)
+    .selectAll("text")
     .data(data)
     .enter()
     .append("text")
-    .text(d => {return d.abbr; })
+    .text(d => { return d.abbr; })
     .attr("x", d => { return x(d.poverty); })
     .attr("y", d => { return y(d.healthcare); })
     .attr("font-size", "5px")
-    .attr("fill", "white");
+    .attr("fill", "white")
+    .attr("text-anchor", "middle");
         
   // circlesGroup.append("text")
   //   .text(data => data.abbr)
