@@ -54,7 +54,7 @@ d3.csv("assets/data/data.csv").then (function(data) {
 
   // Add dots
   var circlesGroup = svg.append('g')
-    .selectAll("dot")
+    .selectAll("circle")
     .data(data)
     .enter()
     .append("circle")
@@ -63,13 +63,10 @@ d3.csv("assets/data/data.csv").then (function(data) {
         .attr("r", 8)
         .style("fill", "rgb(143,194,217)")
 
-  var circleLabels = g.selectAll(null)
-    .data(data)
-    .enter()
-    .append("text")
-    .text(d => `${d.abbr[0]}`)
-    .attr("x", d => {return 1 + d.poverty[0]; })
-    .attr("y", d => {return height - d.healthcare[0]; })
+  circle.append("text")
+    .text(d => {return d.abbr; })
+    .attr("x", d => { return x(d.poverty); })
+    .attr("y", d => { return y(d.healthcare); })
         
   // circlesGroup.append("text")
   //   .text(data => data.abbr)
