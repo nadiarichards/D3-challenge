@@ -1,6 +1,6 @@
-const xValue = d => d.poverty-0.5;
+const xValue = d => d.poverty;
 const xLabel = "In Poverty (%)";
-const yValue = d => d.healthcare-0.5;
+const yValue = d => d.healthcare;
 const yLabel = "Lacks Healthcare (%)";
 
 var margin = {top: 20, right: 30, bottom: 120, left: 120},
@@ -62,6 +62,7 @@ d3.csv("assets/data/data.csv").then (function(data) {
         .attr("cy", d => { return y(d.healthcare); })
         .attr("r", 8)
         .style("fill", "rgb(143,194,217)")
+        .attr("opacity", "0.7");
 
   circlesGroup.selectAll("text")
     .data(data)
