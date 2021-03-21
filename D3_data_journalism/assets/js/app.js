@@ -58,24 +58,36 @@ d3.csv("assets/data/data.csv").then (function(data) {
     .data(data)
     .enter()
     .append("circle")
-        .attr("cx", function (d) { return x(d.poverty); } )
-        .attr("cy", function (d) { return y(d.healthcare); } )
+        .attr("cx", d => { return x(d.poverty); })
+        .attr("cy", d => { return y(d.healthcare); })
         .attr("r", 8)
         .style("fill", "rgb(143,194,217)")
-        .text(data => data.abbr);
 
-  var toolTip = d3.select("body")
-    .append("div")
-    .classed("tooltip", true);
+  var circleLabels = g.selectAll(null)
+    .data(data)
+    .enter()
+    .append("text")
+    .text(d => `${d.abbr[0]}`)
+    .attr("x", d => {return 1 + d.poverty[0]; })
+    .attr("y", d => {return height - d.healthcare[0]; })
+        
+  // circlesGroup.append("text")
+  //   .text(data => data.abbr)
+  //   .attr("x", );
+  //   .attr("y", )
 
-    circlesGroup.on("mouseover", function(d) {
-      toolTip.style("display", "block")
-          .html(
-            `<strong>${dateFormatter(d.date)}<strong><hr>${d.medals}
-        medal(s) won`)
-          .style("left", d3.event.pageX + "px")
-          .style("top", d3.event.pageY + "px");
-    })
+  // var toolTip = d3.select("body")
+  //   .append("div")
+  //   .classed("tooltip", true);
+
+  //   circlesGroup.on("mouseover", function(d) {
+  //     toolTip.style("display", "block")
+  //         .html(
+  //           `<strong>${dateFormatter(d.date)}<strong><hr>${d.medals}
+  //       medal(s) won`)
+  //         .style("left", d3.event.pageX + "px")
+  //         .style("top", d3.event.pageY + "px");
+  //   })
       // Step 3: Create "mouseout" event listener to hide tooltip
       // .on("mouseout", function() {
       //   toolTip.style("display", "none");
