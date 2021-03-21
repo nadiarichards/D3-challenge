@@ -30,7 +30,7 @@ d3.csv("assets/data/data.csv").then (function(data) {
   var x = d3.scaleLinear()
     .domain(d3.extent(data, xValue))
     .range([ 0, width ]);
-  var xAxisG = svg.append("g")
+  var xAxisG = chartGroup.append("g")
     .attr("transform", "translate(0," + height + ")")
     .call(d3.axisBottom(x))
     .append('text')
@@ -43,7 +43,7 @@ d3.csv("assets/data/data.csv").then (function(data) {
   var y = d3.scaleLinear()
     .domain(d3.extent(data, yValue))
     .range([ height, 0]);
-  var yAxisG = svg.append("g")
+  var yAxisG = chartGroup.append("g")
     .call(d3.axisLeft(y))
     .append('text')
     .attr('class', 'axis-label')
@@ -54,8 +54,7 @@ d3.csv("assets/data/data.csv").then (function(data) {
     .text(yLabel);
 
   // Add dots
-  var circlesGroup = svg.append("g")
-    .selectAll("circle")
+  var circlesGroup = ChartGroup.selectAll("circle")
     .data(data)
     .enter()
     .append("circle")
@@ -65,17 +64,20 @@ d3.csv("assets/data/data.csv").then (function(data) {
         .style("fill", "rgb(143,194,217)")
         .attr("opacity", "0.7");
 
-  var circleLabels = circlesGroup.append(g)
-    .selectAll("text")
+  var circleLabels = chartGroup.selectAll("text")
     .data(data)
     .enter()
-    .append("text")
-    .text(d => { return d.abbr; })
+    .append("text");
+
+  circleLabels
     .attr("x", d => { return x(d.poverty); })
-    .attr("y", d => { return y(d.healthcare); })
-    .attr("font-size", "5px")
-    .attr("fill", "white")
-    .attr("text-anchor", "middle");
+    .attr("y", fd => { return y(d.healthcare); })
+    .text(function(d) {return d.abbr; })
+    .attr("font-family", "sans-serif")
+    .attr("font-size", "10px")
+    .attr("text-anchor", "middle")
+    .attr("fill", "white");
+ 
         
   // circlesGroup.append("text")
   //   .text(data => data.abbr)
