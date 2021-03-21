@@ -35,7 +35,7 @@ d3.csv("assets/data/data.csv").then (function(data) {
     .append('text')
     .attr('class', 'axis-label')
     .attr('x', width / 2)
-    .attr('y', 100)
+    .attr('y', 65)
     .text(xLabel);
 
   // Add Y axis
@@ -62,6 +62,7 @@ d3.csv("assets/data/data.csv").then (function(data) {
         .attr("cy", function (d) { return y(d.healthcare); } )
         .attr("r", 8)
         .style("fill", "rgb(143,194,217)")
+        .text(data => data.abbr);
 
   var toolTip = d3.select("body")
     .append("div")
@@ -76,9 +77,9 @@ d3.csv("assets/data/data.csv").then (function(data) {
           .style("top", d3.event.pageY + "px");
     })
       // Step 3: Create "mouseout" event listener to hide tooltip
-      .on("mouseout", function() {
-        toolTip.style("display", "none");
-      });
+      // .on("mouseout", function() {
+      //   toolTip.style("display", "none");
+      // });
 
   // }).catch(function(error) {
   //   console.log(error);
