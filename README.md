@@ -20,7 +20,7 @@ Please see the screenshots below.
 ### Website Screenshots:
 
 1. Scatterplot with state abbreviations in eash dot:
-![scatterplot_with_states](https://github.com/nadiarichards/D3-challenge/blob/main/D3_data_journalism/images/D3_with_labels.png)
+<img src="https://github.com/nadiarichards/D3-challenge/blob/main/D3_data_journalism/images/D3_with_labels.png" width="400" height="300">
 
 2. Scatterplot with tooltips corresponding to the plotted data:
 ![scatterplot_with_tooltips](https://github.com/nadiarichards/D3-challenge/blob/main/D3_data_journalism/images/D3_with_tooltips.png)
