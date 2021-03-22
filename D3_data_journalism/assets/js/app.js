@@ -13,7 +13,8 @@ const svg = d3.select("#scatter")
     .attr("width", width + margin.left + margin.right)
     .attr("height", height + margin.top + margin.bottom)
   .append("g")
-    .attr("transform", `translate(${margin.left}, ${margin.top})`);
+    .attr("transform", `translate(${margin.left}, ${margin.top})`)
+    .attr('class', 'chart');
 
 //Read the data
 d3.csv("assets/data/data.csv").then (function(data) {
@@ -27,7 +28,7 @@ d3.csv("assets/data/data.csv").then (function(data) {
 
   // Add X axis
   var x = d3.scaleLinear()
-    .domain(d3.extent(data, xValue))
+    .domain(d3.extent(data, xValue)).nice()
     .range([ 0, width ]);
   var xAxisG = svg.append("g")
     .attr("transform", "translate(0," + height + ")")
@@ -40,7 +41,7 @@ d3.csv("assets/data/data.csv").then (function(data) {
 
   // Add Y axis
   var y = d3.scaleLinear()
-    .domain(d3.extent(data, yValue))
+    .domain(d3.extent(data, yValue)).nice()
     .range([ height, 0]);
   var yAxisG = svg.append("g")
     .call(d3.axisLeft(y))
@@ -60,23 +61,22 @@ d3.csv("assets/data/data.csv").then (function(data) {
         .attr("cx", d => { return x(d.poverty); })
         .attr("cy", d => { return y(d.healthcare); })
         .attr("r", 8)
-        .style("fill", "rgb(143,194,217)")
+        .attr('class', 'stateCircle')
         .attr("opacity", "0.7");
 
-  var circleLabels = svg.selectAll(null)
+  svg.append("g").attr("font-size", "10px")
+    .selectAll("text")
     .data(data)
     .enter()
-    .append("text");
+    .join("text")
+      .attr("dy", "0.35em")
+      .attr("x", d => { return x(d.poverty); })
+      .attr("y", fd => { return y(d.healthcare); })
+      .text(d => { return d.abbr; })
+      .attr('class', 'stateText');
 
-  circleLabels
-    .attr("x", d => { return x(d.poverty); })
-    .attr("y", fd => { return y(d.healthcare); })
-    .text(d => { return d.abbr; })
-    .attr("font-family", "sans-serif")
-    .attr("font-size", "10px")
-    .attr("text-anchor", "middle")
-    .attr("fill", "white");
- 
+  return svg.node();
+});
 
 
 
@@ -106,7 +106,7 @@ d3.csv("assets/data/data.csv").then (function(data) {
 
   // }).catch(function(error) {
   //   console.log(error);
-});
+
 // }
 
 // var width = parseInt(d3.select("#scatter").style("width"));
