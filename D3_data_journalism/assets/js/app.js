@@ -8,13 +8,12 @@ var margin = {top: 20, right: 30, bottom: 120, left: 120},
     height = 600 - margin.top - margin.bottom;
 
 // append the svg object to the body of the page
-var svg = d3.select("#scatter")
+const svg = d3.select("#scatter")
   .append("svg")
     .attr("width", width + margin.left + margin.right)
-    .attr("height", height + margin.top + margin.bottom);
-
-var chartGroup = svg.append("g")
-    .attr("transform", `translate(" + margin.left + "," + margin.top + ")`);
+    .attr("height", height + margin.top + margin.bottom)
+  .append("g")
+    .attr("transform", `translate(${margin.left}, ${margin.top})`);
 
 //Read the data
 d3.csv("assets/data/data.csv").then (function(data) {
@@ -30,7 +29,7 @@ d3.csv("assets/data/data.csv").then (function(data) {
   var x = d3.scaleLinear()
     .domain(d3.extent(data, xValue))
     .range([ 0, width ]);
-  var xAxisG = chartGroup.append("g")
+  var xAxisG = svg.append("g")
     .attr("transform", "translate(0," + height + ")")
     .call(d3.axisBottom(x))
     .append('text')
@@ -43,7 +42,7 @@ d3.csv("assets/data/data.csv").then (function(data) {
   var y = d3.scaleLinear()
     .domain(d3.extent(data, yValue))
     .range([ height, 0]);
-  var yAxisG = chartGroup.append("g")
+  var yAxisG = svg.append("g")
     .call(d3.axisLeft(y))
     .append('text')
     .attr('class', 'axis-label')
@@ -54,7 +53,7 @@ d3.csv("assets/data/data.csv").then (function(data) {
     .text(yLabel);
 
   // Add dots
-  var circlesGroup = ChartGroup.selectAll("circle")
+  var circlesGroup = svg.selectAll("circle")
     .data(data)
     .enter()
     .append("circle")
@@ -64,7 +63,7 @@ d3.csv("assets/data/data.csv").then (function(data) {
         .style("fill", "rgb(143,194,217)")
         .attr("opacity", "0.7");
 
-  var circleLabels = chartGroup.selectAll("text")
+  var circleLabels = svg.selectAll(null)
     .data(data)
     .enter()
     .append("text");
@@ -72,12 +71,16 @@ d3.csv("assets/data/data.csv").then (function(data) {
   circleLabels
     .attr("x", d => { return x(d.poverty); })
     .attr("y", fd => { return y(d.healthcare); })
-    .text(function(d) {return d.abbr; })
+    .text(d => { return d.abbr; })
     .attr("font-family", "sans-serif")
     .attr("font-size", "10px")
     .attr("text-anchor", "middle")
     .attr("fill", "white");
  
+
+
+
+
         
   // circlesGroup.append("text")
   //   .text(data => data.abbr)
