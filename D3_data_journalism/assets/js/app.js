@@ -54,7 +54,7 @@ d3.csv("assets/data/data.csv").then (function(data) {
     .text(yLabel);
 
   // Add dots
-  var circlesGroup = svg.selectAll("circle")
+  var circlesGroup = svg.selectAll("dots")
     .data(data)
     .enter()
     .append("circle")
@@ -64,8 +64,8 @@ d3.csv("assets/data/data.csv").then (function(data) {
         .attr('class', 'stateCircle')
         .attr("opacity", "0.7");
 
-  svg.append("g").attr("font-size", "10px")
-    .selectAll("text")
+  svg.selectAll(null)
+  // .append("g").attr("font-size", "10px")
     .data(data)
     .enter()
     .join("text")
@@ -73,7 +73,8 @@ d3.csv("assets/data/data.csv").then (function(data) {
       .attr("x", d => { return x(d.poverty); })
       .attr("y", fd => { return y(d.healthcare); })
       .text(d => { return d.abbr; })
-      .attr('class', 'stateText');
+      .attr('class', 'stateText')
+      .attr("font-size", "10px");
 
   return svg.node();
 });
