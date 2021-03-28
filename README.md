@@ -17,7 +17,7 @@ Please see the screenshots below.
 
 ### Website Screenshots:
 
-1. Scatterplot with state abbreviations in eash dot:
+1. Scatterplot with state abbreviations in each dot:
 <img src="https://github.com/nadiarichards/D3-challenge/blob/main/D3_data_journalism/images/D3_with_labels.png" width="600" height="450">
 
 2. Scatterplot with tooltips corresponding to the plotted data:
