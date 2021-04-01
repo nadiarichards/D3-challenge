@@ -10,7 +10,7 @@ Please see the link to my code [here.](https://github.com/nadiarichards/D3-chall
 ### Methods and languages used:
 
 1. JavaScript
-2. D3 library
+2. D3.js
 3. HTML/CSS for writing and styling the webpage
 
 Please see the screenshots below.
